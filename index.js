@@ -53,9 +53,10 @@ function getQueriesAndMutations(definitions) {
 }
 
 function determineDepth(node, fragments, depthSoFar, maxDepth, context, operationName, options, customError) {
+  const operation = (operationName) ? operationName : 'operation'
   if (depthSoFar > maxDepth) {
     return context.reportError(
-      new GraphQLError(`'${operationName}' exceeds maximum operation depth of ${maxDepth}`, [ node ])
+      new GraphQLError(`${customError} - ${operation} exceeds maximum operation depth of ${maxDepth}`, [ node ])
     )
   }
 
